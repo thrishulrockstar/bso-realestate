@@ -1,0 +1,18 @@
+---
+import { useState, useEffect } from 'react';
+import ProductCard from '../Components/ProductCard.astro';
+
+const [products, setProducts] = useState([]);
+
+useEffect(() => {
+  fetch('/api/getProducts')
+    .then(response => response.json())
+    .then(data => setProducts(data));
+}, []);
+
+---
+<div>
+  {products.map(product => (
+    <ProductCard key={product.id} product={product} />
+  ))}
+</div>

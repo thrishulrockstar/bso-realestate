@@ -1,0 +1,42 @@
+---
+import { useState } from 'react';
+
+
+const [username, setUsername] = useState('');
+const [email, setEmail] = useState('');
+const [password, setPassword] = useState('');
+
+const handleRegister = async (event) => {
+  event.preventDefault();
+  const response = await fetch('/api/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ username, email, password }),
+  });
+  const data = await response.json();
+  if (data.success) {
+    // Handle successful registration
+  } else {
+    // Handle registration error
+  }
+};
+---
+
+<form onsubmit={handleRegister}>
+    <label>
+      Username:
+      <input type="text" value={username} onInput={(e) => setUsername(e.target.value)} />
+    </label>
+    <label>
+      Email:
+      <input type="email" value={email} onInput={(e) => setEmail(e.target.value)} />
+    </label>
+    <label>
+      Password:
+      <input type="password" value={password} onInput={(e) => setPassword(e.target.value)} />
+    </label>
+    <button type="submit">Register</button>
+  </form>
+  

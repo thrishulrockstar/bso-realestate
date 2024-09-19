@@ -1,0 +1,28 @@
+---
+import { Code } from "astro:components";
+
+const { product } = Astro.props;
+
+const handleAddToCart = async () => {
+  const response = await fetch('/api/addToCart', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ productId: product.id }),
+  });
+  const data = await response.json();
+  if (data.success) {
+    new MessageEvent('All okay')
+  } else {
+   console.error(Code);
+    
+  }
+};
+---
+<div>
+  <h2>{product.title}</h2>
+  <img src={product.image.url} alt={product.title} />
+  <p>{product.price}</p>
+  <button onclick={handleAddToCart}>Add to Cart</button>
+</div>

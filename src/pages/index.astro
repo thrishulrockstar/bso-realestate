@@ -1,0 +1,28 @@
+---
+import {useState } from 'react';
+import Login from './login.astro';
+import Register from './register.astro';
+import Catalog from './catalog.astro';
+import Cart from './cart.astro';
+
+
+const [currentPage, setCurrentPage] = useState('login');
+
+const handleNavigation = (page) => {
+  setCurrentPage(page);
+};
+---
+
+<nav>
+  <button onClick={() => handleNavigation('login')}>Login</button>
+  <button onClick={() => handleNavigation('register')}>Register</button>
+  <button onClick={() => handleNavigation('catalog')}>Catalog</button>
+  <button onClick={() => handleNavigation('cart')}>Cart</button>
+</nav>
+
+<main>
+  {currentPage === 'login' && <Login />}
+  {currentPage === 'register' && <Register />}
+  {currentPage === 'catalog' && <Catalog />}
+  {currentPage === 'cart' && <Cart />}
+</main>
